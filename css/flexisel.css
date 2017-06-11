@@ -1,0 +1,64 @@
+
+#flexiselDemo1, #flexiselDemo2, #flexiselDemo3 {
+display:none;
+}
+
+.nbs-flexisel-container {
+    position:relative;
+    max-width:100%;
+}
+.nbs-flexisel-ul {
+    position:relative;
+    width:9999px;
+    margin:0px;
+    padding:0px;
+    list-style-type:none;   
+    text-align:center;  
+}
+
+.nbs-flexisel-inner {
+    overflow:hidden;
+    float:left;
+    width:100%; 
+}
+
+.nbs-flexisel-item {
+    float:left;
+    margin:0px;
+    padding:0px;
+    cursor:pointer;
+    position:relative;
+    line-height:0px;
+	height: 150px;
+}
+.nbs-flexisel-item img {
+	/*width: 90%;*/
+	cursor: pointer;
+	position: relative;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+/*** Navigation ***/
+
+.nbs-flexisel-nav-left,
+.nbs-flexisel-nav-right {
+    width: 40px;
+    height: 40px; 
+    position: absolute;
+    cursor: pointer;
+    z-index: 100;
+    opacity: 1;
+}
+
+.nbs-flexisel-nav-left {
+    left: 10px;
+    background: url(../images/cg-arrow-left.png) no-repeat #fff;
+}
+
+.nbs-flexisel-nav-right {
+    right: 5px;
+    background: url(../images/cg-arrow-right.png) no-repeat #fff;
+}

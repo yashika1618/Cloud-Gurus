@@ -1,0 +1,136 @@
+$(function() {
+  $('.menu a[href*=#]:not([href=#])').click(function() {
+	  $('.menu a').removeClass('current');
+	  $(this).addClass('current');
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top - 100
+        }, 1000);
+        return false;
+      }
+    }
+  });
+  $('#mobile-menu a[href*=#]:not([href=#])').click(function() {
+	  $('#mobile-menu a').removeClass('current');
+	  $(this).addClass('current');
+	  $("#mobile-menu .nav-icon").trigger('click');
+	  var hh = $('header').height() + 5;
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top - hh
+        }, 1000);
+        return false;
+      }
+    }
+  });
+  
+  $('a[href*=#]:not([href=#]).scroll, a[href*=#]:not([href=#]).footer-link').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+	  var hh = $('header').height() + 5;
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top - hh
+        }, 1000);
+        return false;
+      }
+    }
+  });
+  
+  $(document).scroll(function () {
+		if ($('body').scrollTop() < 50) {
+			$('.logo').removeClass('active');
+		} else {
+			//$('.logo').animate({'width':'200px','margin-left':'-100px'},200);
+			$('.logo').addClass('active');
+		}
+		var diff = $('.advantages').offset().top - $('body').scrollTop();
+		if (diff < 0) {
+			$('.advantages').addClass('active');
+		} else {
+			$('.advantages').removeClass('active');
+		}
+	});
+	
+	$('.nav-tabs a').click(function (e) {
+	  e.preventDefault()
+	  $(this).tab('show')
+	})
+  	
+	$('#carousel').carousel({
+	  interval: 2000
+	})
+	
+	$(document).on('click','.service-heading a',function(e) {
+		$(this).parent().siblings('.service-desc').slideToggle();
+		$(this).parent().parent().siblings('li').find('.service-desc').slideUp();
+		$(this).parent().parent().parent().parent().siblings('.col-sm-6').find('.service-desc').slideUp();
+		e.preventDefault();
+	});
+	
+	
+	$(".brands-list ul#brands").flexisel({
+        visibleItems: 6,
+        animationSpeed: 500,          
+        pauseOnHover: true,
+        enableResponsiveBreakpoints: true,
+        responsiveBreakpoints: { 
+            portrait: { 
+                changePoint:480,
+                visibleItems: 1
+            }, 
+            landscape: { 
+                changePoint:640,
+                visibleItems: 2
+            },
+            tablet: { 
+                changePoint:768,
+                visibleItems: 3
+            }
+        }
+    });
+	
+	var pwh = window.innerHeight;
+	var psh = $('#slider').height();
+	//alert(window.innerHeight);
+	psh = 650/800*window.innerHeight;
+	$('#slider').height(psh);
+	function maintainheighht(){
+		var cwh = window.innerHeight;
+		var ratio = pwh / cwh;
+		$('#slider').height(psh/ratio);
+		var nsh = psh / ratio;
+		
+		//alert('pwh = '+pwh+' cwh = '+cwh+' ratio = '+ratio+' nsh = '+nsh);
+		
+		pwh = cwh;
+		psh = nsh;
+	
+	}
+	//We want the div to readjust every time there is a resize event:
+	//window.onresize = maintainheighht;
+	$(window).resize(maintainheighht);
+	
+	///////////////////////////////////////////////////////
+	
+	$(document).on('change','#menu',function () {
+		var menu = $(this).val();
+		if (menu != '') {
+			$(".menu a[id='"+menu+"']").trigger('click');
+		}
+	});
+	
+	$(document).on('click','#mobile-menu .nav-icon',function(){
+		$('#mobile-menu').toggleClass('menu-show');
+		//$('body').toggleClass('menu-show');
+		//$('header').toggleClass('menu-show');
+	});
+  
+});
